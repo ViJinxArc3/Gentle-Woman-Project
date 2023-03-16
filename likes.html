@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- STYLE SHEET CSS -->
+    <link rel="stylesheet" href="workshop.css">
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap"
+        rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unica+One&display=swap" rel="stylesheet">
+
+
+    <title>Likes Page</title>
+</head>
+
+<body>
+    <div class="top-bar">
+        <div class="container">
+            <div class="col-12 text-right">
+                <p><a href="tel:+27820521568">Call us at 087 000 0000</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav class="navbar bg-light navbar-light navbar-expand-lg">
+        <div class="container">
+            <a href="index.html" class="navbar-brand"><img src="images/logo.jpeg" alt="logo" title="logo"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a href="../Gentle Woman Project/index.html" class="nav-link active">Home</a>
+                    </li>
+                    <li class="nav-item"><a href="" class="nav-link">Gentle Sponsors</a></li>
+                    <li class="nav-item"><a href="" class="nav-link">Our Team</a></li>
+                    <li class="nav-item"><a href="" class="nav-link">Projects</a></li>
+                    <li class="nav-item"><a href="../Gentle Woman Project/workshop.html" class="nav-link">Workshops</a>
+                    </li>
+                    <li class="nav-item"><a href="../Gentle Woman Project/contact.html" class="nav-link">Contact</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+    <!-- HEADING -->
+    <div class="container col-lg-6 mb-5 text-center mt-3">
+        <h1 class="text-dark pt-4">Liked Workshops</h1>
+        <div class="border-top border-secondary w-25 mx-auto my-3"></div>
+
+        <!-- DISPLAY LIKED WORKSHOPS WITH JS-->
+        <div id="liked-items">
+            <script>// Get the container element for the liked items
+                const likedItemsContainer = document.querySelector('#liked-items');
+
+                // Retrieve the liked items from local storage
+                const likedItems = JSON.parse(localStorage.getItem('likedItems'));
+
+                // If there are liked items, generate HTML elements for each item and append them to the container
+                if (likedItems && likedItems.length > 0) {
+                    likedItems.forEach((item) => {
+                        // Create a new div element for the item
+                        const itemDiv = document.createElement('div');
+                        itemDiv.classList.add('card');
+
+                        // Create the content for the item div
+                        itemDiv.innerHTML = `
+          <div class="card-body mt-2 mb-2">
+            <h5 class="card-title">${item}</h5>
+            
+            <button class="btn btn-danger remove" data-item="${item}">Remove</button>
+            <a class="btn btn-info" href="../Gentle Woman Project/workshop.html"> More Info </a>
+            </div>`;
+
+                        // Append the item div to the container
+                        likedItemsContainer.appendChild(itemDiv);
+                    });
+                }
+
+                // Add a click event listener to the remove buttons
+                const removeButtons = document.querySelectorAll('.remove');
+                removeButtons.forEach((button) => {
+                    button.addEventListener('click', () => {
+                        // Get the item data from the data attribute
+                        const item = button.getAttribute('data-item');
+
+                        // Remove the item from the liked items array
+                        const index = likedItems.indexOf(item);
+                        if (index !== -1) {
+                            likedItems.splice(index, 1);
+                        }
+
+                        // Update the local storage with the updated liked items array
+                        localStorage.setItem('likedItems', JSON.stringify(likedItems));
+
+                        // Remove the item div from the container
+                        button.closest('.card').remove();
+                    });
+                });
+            </script>
+        </div>
+    </div>
+
+    <!-- CDNJS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <!-- POPPER JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <!-- BOOTSTRAP JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <!-- FONT AWESOME -->
+    <script src="docs/all.min.js"></script>
+    <!-- MY JAVASCRIPT -->
+    <script src="script.js"></script>
+</body>
+
+</html>
