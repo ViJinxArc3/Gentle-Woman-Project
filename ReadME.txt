@@ -1,0 +1,1 @@
+This is a non-profit website with html, css and javascript files
